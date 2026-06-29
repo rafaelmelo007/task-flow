@@ -1,0 +1,26 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+*.db
+*.db-shm
+*.db-wal
+logs/
+
+# Environment secrets
+.env
+*.env.local
+
+# Node / Angular
+web/node_modules/
+web/dist/
+web/.angular/
+
+# Coverage
+coverage/
+*.opencover.xml
+
+# OS
+.DS_Store
+Thumbs.db

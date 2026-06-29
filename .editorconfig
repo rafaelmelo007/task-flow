@@ -1,0 +1,74 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+[*.{ts,html,css}]
+indent_size = 2
+
+[*.csproj]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+# C# conventions
+[*.cs]
+# Braces
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+
+# this. qualification
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+# var preferences
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+
+# Namespace style
+csharp_style_namespace_declarations = file_scoped:warning
+
+# Null checks
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+
+# --- Analyzer tuning ---
+# We run the full analyzer set (AnalysisMode=All). The rules below are deliberately
+# disabled because they do not apply to an ASP.NET Core service of this scope; each is
+# documented so the choice is reviewable rather than implicit.
+
+# ConfigureAwait(false) is unnecessary in ASP.NET Core — there is no SynchronizationContext.
+dotnet_diagnostic.CA2007.severity = none
+dotnet_diagnostic.MA0004.severity = none
+# [ApiController] model binding + nullable reference types make manual null-guards on
+# action parameters redundant.
+dotnet_diagnostic.CA1062.severity = none
+# High-performance LoggerMessage delegates are not warranted for the single catch-all
+# error path in GlobalExceptionHandler.
+dotnet_diagnostic.CA1848.severity = none
+# Log/console output intentionally uses the host culture; no user-facing formatting here.
+dotnet_diagnostic.CA1305.severity = none
+# Controllers, the `Program` test-host partial, and cross-assembly extension classes must
+# be public in an ASP.NET app — CA1515 ("make internal") targets libraries, not web hosts.
+dotnet_diagnostic.CA1515.severity = none
+# DI registration classes are conventionally named `DependencyInjection` (one per layer).
+dotnet_diagnostic.CA1724.severity = none

@@ -1,0 +1,7 @@
+<Project>
+  <!-- Override strict settings for test projects. This runs after all imports so IsTestProject is reliable. -->
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AnalysisMode>Default</AnalysisMode>
+  </PropertyGroup>
+</Project>

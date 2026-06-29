@@ -1,0 +1,34 @@
+<Project>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Suppress known SQLite advisory — no patched version of SQLitePCLRaw.lib.e_sqlite3 available -->
+  <ItemGroup>
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-2m69-gcr7-jv3q" />
+  </ItemGroup>
+
+  <!-- Analysis for non-test src projects -->
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AnalysisMode>All</AnalysisMode>
+  </PropertyGroup>
+
+  <!-- Analyzers applied to src projects only (not test projects) -->
+  <ItemGroup Condition="'$(IsTestProject)' != 'true'">
+    <PackageReference Include="Roslynator.Analyzers" Version="4.12.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.206">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.11.0.117924">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
